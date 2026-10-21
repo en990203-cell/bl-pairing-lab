@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7eff2">
+<title>BL 配對研究所</title>
+<style>
+:root{--ink:#30252d;--muted:#796b75;--paper:#fffaf9;--rose:#c85e83;--rose2:#f5dce5;--plum:#68465f;--line:#eadde3;--mint:#dcefe8;--gold:#f5e8c8}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f8edf2,#f8f4ed 55%,#eaf4f0);color:var(--ink);font-family:ui-rounded,"Noto Sans TC","PingFang TC",system-ui,sans-serif;line-height:1.55}
+button,input,select{font:inherit}button{cursor:pointer}
+.wrap{max-width:1120px;margin:auto;padding:26px 18px 56px}
+header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:var(--plum);color:white;display:grid;place-items:center;font-size:23px;box-shadow:0 8px 18px #68465f30}
+h1{font-size:clamp(25px,4vw,36px);line-height:1.15;margin:0;letter-spacing:.02em} .sub{color:var(--muted);margin:6px 0 0;font-size:14px}
+.pill-note{border:1px solid #e7d1dc;background:#fff8fb;border-radius:999px;padding:8px 13px;color:var(--plum);font-size:13px;white-space:nowrap}
+.hero{background:#fffaf9d9;border:1px solid #fff;border-radius:26px;padding:23px;box-shadow:0 12px 36px #68465f0c;margin-bottom:18px}
+.hero h2{margin:0 0 6px;font-size:21px}.hero p{margin:0;color:var(--muted);font-size:14px}
+.top-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.panel{background:#fffaf9e8;border:1px solid #fff;border-radius:22px;padding:20px;box-shadow:0 10px 28px #68465f0b}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}
+.panel h3{margin:0;font-size:18px}.hint{font-size:12px;color:var(--muted)}
+.tag-grid{display:flex;flex-wrap:wrap;gap:8px}
+.tag{border:1px solid var(--line);background:white;color:#5d4b57;border-radius:999px;padding:7px 11px;font-size:13px;transition:.15s}
+.tag:hover{border-color:#cf8da7;transform:translateY(-1px)}.tag.active{background:var(--rose2);border-color:#d58aa6;color:#762b4b;font-weight:650}
+.tag.required{background:#e6f2ed;border-color:#a7cdbd;color:#275f4c}
+.section{margin-top:16px}.section-label{font-size:13px;color:var(--plum);font-weight:750;margin:0 0 9px;display:flex;align-items:center;gap:7px}
+.controls{display:flex;flex-wrap:wrap;gap:9px;margin-top:15px}
+.btn{border:0;border-radius:13px;padding:11px 16px;font-weight:750;transition:.15s}
+.btn-primary{background:var(--plum);color:white;box-shadow:0 7px 16px #68465f24}.btn-primary:hover{background:#513449;transform:translateY(-1px)}
+.btn-secondary{background:white;border:1px solid var(--line);color:var(--plum)}.btn-danger{background:#fff0f2;border:1px solid #f1cbd4;color:#9a3655}
+.result{background:linear-gradient(135deg,#fffafd,#f1e7f1);border:1px solid #e6d4e1;border-radius:25px;padding:22px;margin:18px 0;min-height:130px}
+.result-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:11px;letter-spacing:.16em;color:var(--rose);font-weight:800}
+.result h2{font-size:clamp(22px,4vw,30px);margin:5px 0 8px}.result-desc{color:#665564;margin:0;font-size:14px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:17px}
+.person{border-radius:18px;background:#ffffffc9;border:1px solid #e9dce6;padding:16px}
+.person.attack{border-top:4px solid #c56d91}.person.uke{border-top:4px solid #7aa996}
+.person-title{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.1em}
+.person h3{margin:3px 0 9px;font-size:20px}.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:12px;border-radius:8px;padding:4px 8px;background:#f7e5ec;color:#7a3e58}.uke .chip{background:#e4f1eb;color:#356a56}.setting-chips .chip{background:#eee5f0;color:#674c6b}
+.result-foot{font-size:12px;color:var(--muted);margin-top:14px}
+.details{margin-top:18px}.details summary{cursor:pointer;font-weight:750;color:var(--plum);padding:4px 0}.details-inner{padding-top:13px}
+.form-row{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:end}
+label{display:block;font-size:12px;color:var(--muted);margin:0 0 5px}
+select,input[type=text]{width:100%;border:1px solid var(--line);border-radius:11px;background:white;padding:10px;color:var(--ink);min-width:0}
+.rule-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.rule{display:flex;align-items:center;gap:7px;border:1px solid #efd4dc;background:#fff4f6;border-radius:11px;padding:6px 9px;font-size:12px}
+.rule button{border:0;background:transparent;color:#9a3655;font-size:16px;padding:0 2px}
+.footer{text-align:center;color:#8a7b84;font-size:12px;margin-top:24px}
+.toast{min-height:20px;color:#9a3655;font-size:12px;margin-top:8px}
+@media(max-width:720px){.top-grid{grid-template-columns:1fr}.wrap{padding:18px 12px 40px}.hero,.panel{padding:17px}.pill-note{display:none}.pair{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.form-row .btn{width:100%}header{margin-bottom:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">♡</div><div><h1>BL 配對研究所</h1><p class="sub">把屬性丟進命運的攪拌機，看看這次會配出什麼。</p></div></div>
+  <div class="pill-note">純幻想靈感・無廣告</div>
+</header>
+<section class="hero">
+  <h2>今天想看哪一種命運？</h2>
+  <p>可先勾選想要的屬性；沒勾選的分類就交給隨機生成。排除條件會優先套用，盡量避開互相打架的設定。</p>
+</section>
+
+<div class="top-grid">
+<section class="panel">
+ <div class="panel-head"><h3>01　故事背景／世界觀</h3><span class="hint">可複選・勾選代表必帶</span></div>
+ <div id="worldTags" class="tag-grid"></div>
+ <div class="section"><p class="section-label">關係與劇情元素</p><div id="tropeTags" class="tag-grid"></div></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h3>02　攻屬性</h3><span class="hint">可複選・勾選代表必帶</span></div>
+ <div id="gongTags" class="tag-grid"></div>
+ <div class="section"><p class="section-label">攻的身分／特徵</p><div id="gongExtraTags" class="tag-grid"></div></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h3>03　受屬性</h3><span class="hint">可複選・勾選代表必帶</span></div>
+ <div id="shouTags" class="tag-grid"></div>
+ <div class="section"><p class="section-label">受的身分／特徵</p><div id="shouExtraTags" class="tag-grid"></div></div>
+</section>
+<section class="panel">
+ <div class="panel-head"><h3>04　其他加料</h3><span class="hint">讓配對更有戲</span></div>
+ <div class="section"><p class="section-label">氛圍／口味</p><div id="flavorTags" class="tag-grid"></div></div>
+ <div class="section"><p class="section-label">生成方式</p>
+  <div class="tag-grid" id="modeTags">
+   <button class="tag active" data-mode="balanced">平衡配對</button><button class="tag" data-mode="chaos">放飛自我</button><button class="tag" data-mode="sweet">偏甜</button><button class="tag" data-mode="angst">偏虐</button>
+  </div>
+  <p class="hint">平衡配對會避開已知矛盾；放飛自我會放寬部分相性規則，但仍遵守你設定的排除條件。</p>
+ </div>
+</section>
+</div>
+
+<div class="controls">
+ <button class="btn btn-primary" id="generate">✦ 開始配對</button>
+ <button class="btn btn-secondary" id="clearChosen">清除必帶屬性</button>
+ <button class="btn btn-secondary" id="randomize">全部隨機來一組</button>
+</div>
+
+<section class="result" id="result" aria-live="polite">
+ <div class="result-top"><span class="eyebrow">YOUR RANDOM PAIRING</span><span class="hint">等待命運揭曉</span></div>
+ <h2>按下「開始配對」</h2>
+ <p class="result-desc">讓世界觀、攻受屬性和故事氛圍撞在一起。</p>
+</section>
+
+<section class="panel details">
+ <details open>
+  <summary>排除設定：我不想看到什麼？</summary>
+  <div class="details-inner">
+   <p class="hint">這裡的設定會在生成時優先遵守。排除屬性代表攻受雙方都不會抽到該標籤；排除組合則只排除你指定的「攻 × 受」配法。</p>
+   <div class="section"><p class="section-label">排除特定屬性</p><div id="excludeTags" class="tag-grid"></div></div>
+   <div class="section">
+    <p class="section-label">排除特定組合（手動新增）</p>
+    <div class="form-row">
+     <div><label for="banGong">不想要的攻屬性</label><select id="banGong"></select></div>
+     <div><label for="banShou">不想要的受屬性</label><select id="banShou"></select></div>
+     <button class="btn btn-secondary" id="addBan">新增排除</button>
+    </div>
+    <div id="rules" class="rule-list"></div>
+    <div class="toast" id="notice"></div>
+   </div>
+  </div>
+ </details>
+</section>
+<p class="footer">這是可在瀏覽器直接使用的單頁原型。設定暫存在目前頁面，重新整理後會重置；無帳號、無追蹤、無廣告。</p>
+</div>
+<script>
+const data = {
+ world:[
+  ["校園","校園"],["大學／社團","校園"],["高中生","校園"],["職場","職場"],["演藝圈","職場"],["娛樂圈／偶像","職場"],["醫療／醫院","職場"],["警察／刑偵","職場"],["軍旅","職場"],["古風／架空古代","時代"],["宮廷／權謀","時代"],["西方奇幻","奇幻"],["東方玄幻／修仙","奇幻"],["ABO","特殊世界觀"],["哨兵嚮導","特殊世界觀"],["獸人／獸化","特殊世界觀"],["人外世界","特殊世界觀"],["末日生存","特殊世界觀"],["賽博龐克","科幻"],["星際／太空","科幻"],["時間循環","奇幻"],["穿書","奇幻"],["快穿","奇幻"],["無限流／副本","奇幻"],["靈異／鬼怪","奇幻"],["神明與信徒","奇幻"],["人類與非人","奇幻"],["黑道／地下組織","現代"],["豪門／財閥","現代"],["合租","現代"],["青梅竹馬","現代"],["網遊／電競","現代"],["直播主／網紅","現代"],["公路旅行","現代"],["鄉村／小鎮","現代"],["孤島／封閉空間","懸疑"],["密室／懸疑","懸疑"],["災難救援","現代"],["平行世界","科幻"],["童話改編","奇幻"]],
+ trope:[
+  ["先婚後愛","關係"],["契約戀愛","關係"],["假戲真做","關係"],["暗戀成真","關係"],["雙向暗戀","關係"],["單向救贖","關係"],["宿敵變情人","關係"],["竹馬成戀人","關係"],["破鏡重圓","關係"],["久別重逢","關係"],["一見鍾情","關係"],["日久生情","關係"],["替身／白月光","關係"],["掉馬甲","劇情"],["身份錯位","劇情"],["失憶","劇情"],["失而復得","劇情"],["追妻火葬場","劇情"],["先虐後甜","氛圍"],["慢熱拉扯","氛圍"],["年齡差","關係"],["雙向奔赴","關係"],["歡喜冤家","關係"],["意外同居","關係"],["命中注定","關係"],["彼此唯一","關係"],["偽骨科／無血緣","關係"],["師生／師徒","關係"],["主僕","關係"],["上下級","關係"],["共犯","劇情"],["互相利用","劇情"],["秘密戀情","劇情"],["公開戀愛","劇情"],["三角關係","劇情"],["養成系","關係"],["年下直球","關係"],["久處不厭","氛圍"],["歡迎修羅場","氛圍"]]
+};
+const gong = [
+ ["冷臉攻","性格"],["面癱攻","性格"],["禁慾攻","性格"],["高冷攻","性格"],["霸總攻","身分"],["腹黑攻","性格"],["病嬌攻","性格"],["瘋批攻","性格"],["忠犬攻","性格"],["年下攻","關係"],["年上攻","關係"],["陽光攻","性格"],["直球攻","性格"],["溫柔攻","性格"],["爹系攻","性格"],["年級第一攻","身分"],["學霸攻","身分"],["校霸攻","身分"],["精英攻","身分"],["社恐攻","性格"],["社牛攻","性格"],["天然呆攻","性格"],["卡哇1","性格"],["反差萌攻","性格"],["傲嬌攻","性格"],["嘴硬心軟攻","性格"],["毒舌攻","性格"],["釣系攻","性格"],["綠茶攻","性格"],["白切黑攻","性格"],["純情攻","性格"],["笨蛋帥哥攻","性格"],["哭包攻","性格"],["撒嬌攻","性格"],["醋王攻","性格"],["佔有慾強攻","性格"],["自卑攻","性格"],["敏感攻","性格"],["遲鈍攻","性格"],["年齡小但可靠","反差"],["矮攻","體型"],["肌肉攻","體型"],["纖細攻","體型"],["美人攻","外貌"],["眼鏡攻","外貌"],["長髮攻","外貌"],["金髮攻","外貌"],["人夫攻","身分"],["人妻感攻","氣質"],["社畜攻","身分"],["醫生攻","職業"],["警察攻","職業"],["演員攻","職業"],["偶像攻","職業"],["廚師攻","職業"],["富二代攻","身分"],["窮小子攻","身分"],["騎士攻","身分"],["皇帝攻","身分"],["反派攻","身分"],["魔王攻","身分"],["神明攻","身分"],["吸血鬼攻","人外"],["狼人攻","人外"],["機器人攻","人外"],["觸手攻","人外"],["非人攻","人外"],["雙性攻","身體設定"],["陽痿攻","身體設定"],["殘疾攻","身體設定"],["失明攻","身體設定"],["失聰攻","身體設定"],["ABO：Alpha攻","特殊"],["ABO：Omega攻","特殊"],["哨兵攻","特殊"],["嚮導攻","特殊"],["獸人攻","特殊"]
+];
+const shou = [
+ ["傲嬌受","性格"],["女王受","性格"],["誘受","性格"],["不良受","身分"],["壯受","體型"],["人夫受","氣質"],["爸爸系受","氣質"],["大奶受","體型"],["雙性受","身體設定"],["冷淡受","性格"],["高嶺之花受","氣質"],["清冷受","氣質"],["病弱受","身體設定"],["美人受","外貌"],["天然呆受","性格"],["呆萌受","性格"],["腹黑受","性格"],["病嬌受","性格"],["瘋批受","性格"],["毒舌受","性格"],["嘴硬心軟受","性格"],["傲氣受","性格"],["直球受","性格"],["純情受","性格"],["遲鈍受","性格"],["社恐受","性格"],["社牛受","性格"],["哭包受","性格"],["釣系受","性格"],["綠茶受","性格"],["白切黑受","性格"],["反差萌受","性格"],["傻白甜受","性格"],["人妻受","氣質"],["賢慧受","氣質"],["事業心受","性格"],["年上受","關係"],["年下受","關係"],["高個受","體型"],["矮受","體型"],["肌肉受","體型"],["纖細受","體型"],["眼鏡受","外貌"],["長髮受","外貌"],["短髮受","外貌"],["金髮受","外貌"],["黑髮受","外貌"],["學霸受","身分"],["校霸受","身分"],["老師受","職業"],["醫生受","職業"],["警察受","職業"],["演員受","職業"],["偶像受","職業"],["作家受","職業"],["社畜受","身分"],["富二代受","身分"],["窮小子受","身分"],["皇子受","身分"],["騎士受","身分"],["反派受","身分"],["魔王受","身分"],["神明受","身分"],["吸血鬼受","人外"],["狼人受","人外"],["機器人受","人外"],["觸手受","人外"],["非人受","人外"],["陽痿受","身體設定"],["殘疾受","身體設定"],["失明受","身體設定"],["失聰受","身體設定"],["ABO：Alpha受","特殊"],["ABO：Omega受","特殊"],["哨兵受","特殊"],["嚮導受","特殊"],["獸人受","特殊"]
+];
+const flavor = [["甜寵","甜度"],["高張力","氛圍"],["全員惡人","氛圍"],["日常治癒","氛圍"],["酸澀暗戀","氛圍"],["狗血灑滿","氛圍"],["懸疑感","氛圍"],["黑暗向","氛圍"],["喜劇向","氛圍"],["強強","關係"],["勢均力敵","關係"],["體型差","體型"],["身高差","體型"],["力量差","體型"],["反差感","氛圍"],["雙潔","偏好"],["破碎感","氛圍"],["修羅場","氛圍"],["極限拉扯","氛圍"],["救贖感","氛圍"],["HE","結局"],["BE","結局"],["開放式結局","結局"],["年齡差","關係"],["雙強","關係"]];
+const allLists = {world:data.world,trope:data.trope,gong, gongExtra:[],shou,shouExtra:[],flavor};
+const chosen = new Set(); const excluded = new Set(); const bans = []; let mode="balanced"; let latest=null;
+const groups = [
+ ["worldTags","world"],["tropeTags","trope"],["gongTags","gong"],["gongExtraTags","gongExtra"],["shouTags","shou"],["shouExtraTags","shouExtra"],["flavorTags","flavor"]
+];
+function renderTags(id,key,exclusion=false){
+ const el=document.getElementById(id); const arr=allLists[key]||[];
+ el.innerHTML=arr.map(([name])=>`<button class="tag ${exclusion&&excluded.has(name)?"active":(!exclusion&&chosen.has(name)?"active":"")}" data-name="${name.replaceAll('"','&quot;')}" data-key="${key}" ${exclusion?'data-exclude="1"':''}>${name}</button>`).join("");
+}
+groups.forEach(([id,key])=>renderTags(id,key));
+function allTraits(){return [...new Set(Object.values(allLists).flat().map(x=>x[0]))]}
+function traitType(name){for(const arr of Object.values(allLists)){const item=arr.find(x=>x[0]===name);if(item)return item[1]}return ""}
+renderTags("excludeTags","all",true);
+document.getElementById("excludeTags").innerHTML=allTraits().map(name=>`<button class="tag ${excluded.has(name)?"active":""}" data-name="${name}" data-exclude="1">${name}</button>`).join("");
+document.addEventListener("click",e=>{
+ const b=e.target.closest("button.tag"); if(!b)return;
+ if(b.dataset.mode){mode=b.dataset.mode;document.querySelectorAll("[data-mode]").forEach(x=>x.classList.toggle("active",x===b));return}
+ const name=b.dataset.name;if(!name)return;
+ if(b.dataset.exclude){excluded.has(name)?excluded.delete(name):excluded.add(name);renderExclusions();return}
+ chosen.has(name)?chosen.delete(name):chosen.add(name);
+ renderTagsForAll();
+});
+function renderTagsForAll(){groups.forEach(([id,key])=>renderTags(id,key));}
+function renderExclusions(){document.getElementById("excludeTags").innerHTML=allTraits().map(name=>`<button class="tag ${excluded.has(name)?"active":""}" data-name="${name}" data-exclude="1">${name}</button>`).join("")}
+function fillSelect(id,arr){const el=document.getElementById(id);el.innerHTML=arr.map(([n])=>`<option value="${n}">${n}</option>`).join("")}
+fillSelect("banGong",gong);fillSelect("banShou",shou);
+function isHumanTrait(t){return ["人外","特殊"].includes(traitType(t))||["非人攻","非人受","吸血鬼攻","吸血鬼受","狼人攻","狼人受","機器人攻","機器人受","觸手攻","觸手受","神明攻","神明受","獸人攻","獸人受","魔王攻","魔王受"].includes(t)}
+function conflict(a,b){
+ if(mode==="chaos")return false;
+ const pairs=[["冷臉攻","卡哇1"],["面癱攻","卡哇1"],["高冷攻","撒嬌攻"],["禁慾攻","陽光攻"],["冷臉攻","陽光攻"],["冷臉攻","笨蛋帥哥攻"],["面癱攻","哭包攻"]];
+ return pairs.some(p=>p.includes(a)&&p.includes(b));
+}
+function pickFrom(arr,side){
+ let pool=arr.filter(([n])=>!excluded.has(n));
+ if(side==="gong")pool=pool.filter(([n])=>!n.endsWith("受"));
+ if(side==="shou")pool=pool.filter(([n])=>!n.endsWith("攻"));
+ if(!pool.length)return null;
+ const required=[...chosen].filter(n=>pool.some(x=>x[0]===n));
+ if(required.length)return required[Math.floor(Math.random()*required.length)];
+ return pool[Math.floor(Math.random()*pool.length)][0];
+}
+function pickPool(key,side){return allLists[key].filter(([n])=>!excluded.has(n)&&!(side==="gong"&&n.endsWith("受"))&&!(side==="shou"&&n.endsWith("攻")))}
+function pickSide(keys,side,base){
+ let pool=keys.flatMap(k=>pickPool(k,side));
+ pool=[...new Map(pool.map(x=>[x[0],x])).values()];
+ const required=[...chosen].filter(n=>pool.some(x=>x[0]===n));
+ if(required.length){
+   const first=required[Math.floor(Math.random()*required.length)];
+   pool=pool.filter(x=>x[0]!==first);
+   let extra=pool.length&&Math.random()<.6?pool[Math.floor(Math.random()*pool.length)][0]:null;
+   return extra?[first,extra]:[first];
+ }
+ let count=Math.random()<.28?1:2;const out=[];
+ while(pool.length&&out.length<count){const i=Math.floor(Math.random()*pool.length);out.push(pool.splice(i,1)[0][0])}
+ return out;
+}
+function chooseWorld(){
+ let worlds=pickPool("world");
+ const req=[...chosen].filter(n=>data.world.some(x=>x[0]===n));
+ const primary=req.length?req[Math.floor(Math.random()*req.length)]:worlds[Math.floor(Math.random()*worlds.length)]?.[0];
+ let tropes=pickPool("trope");let flavorPool=pickPool("flavor");
+ let t=[...chosen].filter(n=>data.trope.some(x=>x[0]===n));
+ let f=[...chosen].filter(n=>flavor.some(x=>x[0]===n));
+ if(!t.length&&tropes.length)t=[tropes[Math.floor(Math.random()*tropes.length)][0]];
+ if(!f.length&&flavorPool.length)f=[flavorPool[Math.floor(Math.random()*flavorPool.length)][0]];
+ return {world:primary,tropes:t.slice(0,2),flavors:f.slice(0,2)};
+}
+function isBanned(g,s){return bans.some(x=>x.g===g&&x.s===s)}
+function generate(){
+ let w=chooseWorld(),g=[],s=[],attempt=0;
+ while(attempt++<100){
+   g=pickSide(["gong","gongExtra"],"gong");
+   s=pickSide(["shou","shouExtra"],"shou");
+   const internalConflict=(arr)=>arr.some((a,i)=>arr.some((b,j)=>i!==j&&conflict(a,b)));
+   const invalid=g.some(x=>excluded.has(x))||s.some(x=>excluded.has(x))||g.some(x=>x.endsWith("受"))||s.some(x=>x.endsWith("攻"))||internalConflict(g)||internalConflict(s)||g.some(a=>s.some(b=>conflict(a,b)))||g.some(a=>s.some(b=>isBanned(a,b)));
+   if(!invalid)break;
+ }
+ if(!g.length||!s.length){document.getElementById("notice").textContent="目前排除條件太多，抽不到合適組合。請移除部分限制。";return}
+ latest={w,g,s};
+ const extraWorld=w.world?[w.world]:[];
+ const allSetting=[...extraWorld,...w.tropes,...w.flavors];
+ const title=`${g[0]} × ${s[0]}`;
+ const desc=mode==="sweet"?"本次走偏甜路線：讓關係在日常與互相照顧中慢慢升溫。":mode==="angst"?"本次走偏虐路線：誤解、克制與遲來的坦白都可以成為故事引線。":mode==="chaos"?"本次放飛自我：不尋常的反差也許正是故事最有趣的地方。":"本次以設定相容為優先，保留一點反差，讓兩個人有互相吸引的理由。";
+ document.getElementById("result").innerHTML=`<div class="result-top"><span class="eyebrow">YOUR RANDOM PAIRING</span><span class="hint">第 ${Math.floor(Math.random()*9000+1000)} 號命運</span></div><h2>${title}</h2><p class="result-desc">${desc}</p><div class="pair"><div class="person attack"><div class="person-title">攻　/　TOP</div><h3>${g[0]}</h3><div class="chips">${g.map(x=>`<span class="chip">${x}</span>`).join("")}</div></div><div class="person uke"><div class="person-title">受　/　BOTTOM</div><h3>${s[0]}</h3><div class="chips">${s.map(x=>`<span class="chip">${x}</span>`).join("")}</div></div></div><div class="section"><p class="section-label">世界觀與故事加料</p><div class="chips setting-chips">${allSetting.map(x=>`<span class="chip">${x}</span>`).join("")}</div></div><p class="result-foot">可把這組當作靈感起點；屬性是創作標籤，不代表角色只能有單一性格。</p>`;
+ document.getElementById("notice").textContent="";
+}
+document.getElementById("generate").addEventListener("click",generate);
+document.getElementById("randomize").addEventListener("click",()=>{chosen.clear();renderTagsForAll();generate()});
+document.getElementById("clearChosen").addEventListener("click",()=>{chosen.clear();renderTagsForAll()});
+document.getElementById("addBan").addEventListener("click",()=>{
+ const g=document.getElementById("banGong").value,s=document.getElementById("banShou").value;
+ if(bans.some(x=>x.g===g&&x.s===s)){document.getElementById("notice").textContent="這組排除條件已經存在。";return}
+ bans.push({g,s});renderBans();document.getElementById("notice").textContent="";
+});
+function renderBans(){document.getElementById("rules").innerHTML=bans.length?bans.map((x,i)=>`<span class="rule">${x.g} × ${x.s}<button aria-label="移除排除組合" data-remove="${i}">×</button></span>`).join(""):'<span class="hint">還沒有設定排除組合。</span>'}
+document.getElementById("rules").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(!b)return;bans.splice(Number(b.dataset.remove),1);renderBans()});
+renderBans();
+</script>
+</body>
+</html>
